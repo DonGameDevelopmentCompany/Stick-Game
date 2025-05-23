@@ -68,8 +68,10 @@ const initGame = async (button, clickedLetter) => {
         
         wrongGuessCount++;
         stickmanImage.src = `./images/Stickman_damaged.gif`;
+        bugImage.src = `./images/Bug_idle.gif`; 
         await waitFrames(20);
         stickmanImage.src = `./images/Stickman_idle.gif`;
+        bugImage.src = `./images/Bug_idle.gif`;
     }
     button.disabled = true;
     guessesText.innerText = `${wrongGuessCount} / ${maxGuesses}`;

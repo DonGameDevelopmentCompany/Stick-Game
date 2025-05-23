@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loading...</title>
+  <link rel="stylesheet" href="loading.css">
+</head>
+<body>
+  <div class="loading-container">
+    <div class="chase-scene">
+      <img src="images/Stickman-running.gif" alt="Stickman" class="stickman">
+      <img src="images/Bug_idle.gif" alt="Bug" class="bug">
+    </div>
+    <div class="loading-bar-container">
+      <div class="loading-bar-bg">
+        <div class="loading-bar-fill" id="loadingBarFill"></div>
+        <pre class="loading-code" id="loadingCode"></pre>
+      </div>
+    </div>
+    <div class="loading-text">Loading...</div>
+  </div>
+  <script>
+    const javaSnippets = [
+      'public class HelloWorld {',
+      '  public static void main(String[] args) {',
+      '    System.out.println("Hello, World!");',
+      '  }',
+      '}',
+      'for(int i=0;i<10;i++){',
+      '  System.out.println(i);',
+      '}',
+      'int sum = 0;',
+      'for(int n : numbers) sum += n;',
+      'if(a > b) { return a; } else { return b; }',
+      'String s = "Stickman";',
+      'while(true) { break; }',
+      'List<String> list = new ArrayList<>();'
+    ];
+
+    let progress = 0;
+    const loadingBarFill = document.getElementById('loadingBarFill');
+    const loadingCode = document.getElementById('loadingCode');
+    const stickman = document.querySelector('.stickman');
+    const bug = document.querySelector('.bug');
+
+
+    const stickmanMax = 200; 
+    const bugStart = -50;    
+    const bugMax = 100;     
+
+    function animateLoading() {
+      if (progress < 100) {
+        progress += 1;
+        loadingBarFill.style.width = progress + '%';
+
+        stickman.style.left = (stickmanMax * (progress / 100)) + 'px';
+        bug.style.left = (bugStart + (bugMax * (progress / 100))) + 'px';
+
+        let lines = [];
+        for (let i = 0; i < 5; i++) {
+          lines.push(javaSnippets[Math.floor(Math.random() * javaSnippets.length)]);
+        }
+        loadingCode.textContent = lines.join('\n');
+        setTimeout(animateLoading, 45);
+      } else {
+        window.location.href = "index.html";
+      }
+    }
+    animateLoading();
+  </script>
+</body>
+</html>
